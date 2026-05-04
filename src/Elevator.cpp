@@ -16,26 +16,29 @@ int Elevator::get_floor() {
 void Elevator::display_floor() {
     cout << "The current floor is: " << current_floor << "F" << endl;
 }
+void Elevator::display_moving() {
+    cout << "Moving... " << current_floor << "F" << endl;
+}
 void Elevator::move(int user_floor, int target_floor) {
     if (user_floor < min_floor || user_floor > max_floor || target_floor < min_floor ||
         target_floor > max_floor) {
         cout << "Invalid Floor, please enter 1F to 10F" << endl;
         return;
     }
-    if (current_floor == target_floor) {
-        cout << "Current floor and target floor cannot be the same, please try again" << endl;
+    if (user_floor == target_floor) {
+        cout << "User floor and target floor cannot be the same, please try again" << endl;
         return;
     }
     int diff = user_floor - current_floor;
     if (diff > 0) {
         while (current_floor != user_floor) {
-            display_floor();
+            display_moving();
             current_floor++;
             this_thread::sleep_for(chrono::seconds(1));
         }
     } else if (diff < 0) {
         while (current_floor != user_floor) {
-            display_floor();
+            display_moving();
             current_floor--;
             this_thread::sleep_for(chrono::seconds(1));
         }
@@ -46,13 +49,13 @@ void Elevator::move(int user_floor, int target_floor) {
     diff = target_floor - current_floor;
     if (diff > 0) {
         while (current_floor != target_floor) {
-            display_floor();
+            display_moving();
             current_floor++;
             this_thread::sleep_for(chrono::seconds(1));
         }
     } else if (diff < 0) {
         while (current_floor != target_floor) {
-            display_floor();
+            display_moving();
             current_floor--;
             this_thread::sleep_for(chrono::seconds(1));
         }

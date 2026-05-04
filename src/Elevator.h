@@ -10,5 +10,6 @@ class Elevator {
     Elevator();
     int get_floor();
     void display_floor();
+    void display_moving();
     void move(int user_floor, int target_floor);
 };

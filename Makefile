@@ -6,7 +6,10 @@ TEST_TARGET = build/test
 SRCS = src/main.cpp src/Elevator.cpp
 TEST_SRCS = src/test.cpp src/Elevator.cpp
 
-all: main test
+all: build main test
+
+build:
+	mkdir -p build
 
 main: $(SRCS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $(TARGET)

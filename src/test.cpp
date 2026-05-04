@@ -6,7 +6,7 @@
 using namespace std;
 
 void test_invalid_floor() {
-    cout << "-----TEST 1: Invalid Floor-----" << endl;
+    cout << "-----TEST 1: Invalid Input-----" << endl;
     Elevator e;
     cout << "TEST 1-1: Invalid Floor" << endl;
     e.move(0, 5);
@@ -18,8 +18,10 @@ void test_invalid_floor() {
     e.move(2, 0);
     assert(e.get_floor() == 1);
     cout << "TEST 1-2: Same Floor" << endl;
-    e.move(3, 3);
-    assert(e.get_floor() == 3);
+    e.move(1, 1);
+    assert(e.get_floor() == 1);
+    e.move(5, 5);
+    assert(e.get_floor() == 1);
     cout << "----------TEST1 PASS----------" << endl;
 }
 

@@ -5,7 +5,9 @@
 using namespace std;
 
 int main() {
+    cout << "Start the Elevator1 ..." << endl;
     Elevator elevator1;
+    cout << "Start the Elevator2 ..." << endl;
     Elevator elevator2;
 
     int user_floor, target_floor;
