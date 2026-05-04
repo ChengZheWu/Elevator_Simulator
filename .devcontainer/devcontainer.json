@@ -1,0 +1,29 @@
+{
+  "name": "C++ Development",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "C_Cpp.default.compilerPath": "/usr/bin/g++",
+        "C_Cpp.default.cStandard": "c17",
+        "C_Cpp.default.cppStandard": "c++17",
+        "C_Cpp.default.intelliSenseMode": "linux-gcc-x64",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cmake-tools",
+        "twxs.cmake",
+        "streetsidesoftware.code-spell-checker",
+        "mhutchie.git-graph"
+      ]
+    }
+  },
+  "postCreateCommand": "echo '✅ C++ DevContainer ready! Use Ctrl+Shift+B to build, or run: g++ src/main.cpp -o build/main && ./build/main'",
+  "remoteUser": "vscode"
+}

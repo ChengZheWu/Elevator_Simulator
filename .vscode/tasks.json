@@ -1,0 +1,130 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Create build directory",
+      "type": "shell",
+      "command": "mkdir -p build",
+      "presentation": { "reveal": "silent" }
+    },
+    {
+      "label": "🔨 Build (g++ C++17)",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-std=c++17",
+        "-Wall",
+        "-Wextra",
+        "-g",
+        "${file}",
+        "-o",
+        "build/${fileBasenameNoExtension}"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": "$gcc",
+      "dependsOn": "Create build directory"
+    },
+    {
+      "label": "🔨 Build All Sources (g++)",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-std=c++17",
+        "-Wall",
+        "-Wextra",
+        "-g",
+        "src/*.cpp",
+        "-o",
+        "build/main"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": "$gcc",
+      "dependsOn": "Create build directory"
+    },
+    {
+      "label": "▶️ Run",
+      "type": "shell",
+      "command": "./build/${fileBasenameNoExtension}",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "dependsOn": "🔨 Build (g++ C++17)"
+    },
+    {
+      "label": "⚡ Build & Run",
+      "type": "shell",
+      "command": "g++ -std=c++17 -Wall -Wextra -g ${file} -o build/${fileBasenameNoExtension} && echo '--- Output ---' && ./build/${fileBasenameNoExtension}",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": "$gcc",
+      "dependsOn": "Create build directory"
+    },
+    {
+      "label": "🐛 Build with Debug Symbols",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-std=c++17",
+        "-Wall",
+        "-Wextra",
+        "-g3",
+        "-DDEBUG",
+        "${file}",
+        "-o",
+        "build/${fileBasenameNoExtension}_debug"
+      ],
+      "group": "build",
+      "problemMatcher": "$gcc",
+      "dependsOn": "Create build directory"
+    },
+    {
+      "label": "🚀 Build Release (Optimized)",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-std=c++17",
+        "-O2",
+        "-DNDEBUG",
+        "${file}",
+        "-o",
+        "build/${fileBasenameNoExtension}_release"
+      ],
+      "group": "build",
+      "problemMatcher": "$gcc",
+      "dependsOn": "Create build directory"
+    },
+    {
+      "label": "🧹 Clean Build",
+      "type": "shell",
+      "command": "rm -rf build && mkdir -p build && echo 'Build directory cleaned!'",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "🔍 Check Memory (Valgrind)",
+      "type": "shell",
+      "command": "valgrind --leak-check=full --show-leak-kinds=all ./build/${fileBasenameNoExtension}",
+      "group": "test",
+      "dependsOn": "🔨 Build (g++ C++17)"
+    }
+  ]
+}
